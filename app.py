@@ -12,32 +12,17 @@ def mapview():
 # creating a map in the view
 	mymap = Map(
 	identifier="view-side",
-	lat=50,
-	lng=50,
-	markers=[(50, 50)]
-	)
-	sndmap = Map(
-	identifier="sndmap",
-	lat=37.4419,
-	lng=-122.1419,
-	zoom=12,
-    cluster=True,
-	markers=[
-	{
-	'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-	'lat': 300.4657,
-	'lng': 456.1419,
-	'infobox': "<b>Hello World</b>"
-	},
+	lat=122.4148,
+	lng=37.7599,
+	markers=[(122.4148, 37.7599)]
+	),
 	{
 	'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-	'lat': 37.4300,
-	'lng': -122.1400,
+	'lat': 122.4148,
+	'lng': 37.7599,
 	'infobox': "<b>Hello World from other place</b>"
 	}
-	]
-	)
-	return render_template('test.html', mymap=mymap, sndmap=sndmap)
+	return render_template('test.html', mymap=mymap)
 
 if __name__ == "__main__":
     app.run()

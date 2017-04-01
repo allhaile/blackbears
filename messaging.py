@@ -44,6 +44,10 @@ def all_messages():
 
 def print_page(user, nearbyStuff):
 	message_box = f"""<form action="/send-message" method="post" id="mform">
+	<h1 style="font-family:verdana;">Message other travelers!</h1>
+
+	<body style="background-color:powderblue;">
+
  	User Name: <input type= "text" name="user" value="{user}"><br>
  	Message: <input type="text" name="message"><br>
 	<button type="submit" form="mform" value="Submit">Submit</button>
@@ -58,7 +62,7 @@ def print_page(user, nearbyStuff):
 
 	if nearbyStuff:
 		message_box = message_box + str(nearbyStuff)
-		
+
 	return message_box
 
 if __name__ == "__main__" : app.run()

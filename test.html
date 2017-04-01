@@ -3,11 +3,9 @@
 
 <h2> Google Dev Bus - Rua Quatá, 255 </h2>
 <h2> First map generated in view</h2>
-{% with %}
-{% set location=(lat ,lng) %}
-       
-{{googlemap("my_awesome_map", lat=location.0, lng=location.1, markers=[(0.12, -0.45345)])}}
-{% endwith %}
 
+ <div>      
+{{googlemap("my_awesome_map", lat=lat, lng=lng, markers=[(lat, lng)])}}
+</div>
 
 </body>

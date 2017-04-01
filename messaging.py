@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 messages = []
 
-@app.route("/", methods =['GET'])
+@app.route("/outdoor-message-board", methods =['GET'])
 
 #initial message should go to this route, then after messages are put in it 
 #will redirect to the /send-message route
@@ -58,15 +58,14 @@ def all_messages():
 
 
 def print_page(user, nearbyStuff):
-	message_box = f"""<form action="/send-message" method="post" id="mform">
+	message_box = """<form action="/send-message" method="post" id="mform">
 	<h1 style="font-family:verdana;">Meet travelers in the area interested in exploring the Outdoors</h1>
 
 	<body style="background-color:powderblue;">
 
- 	User Name: <input type= "text" name="user" value="{user}"><br>
- 	Message: <input type="text" name="message" value="message"><br>
-	<button type="submit" form="mform" value="Submit">Submit</button>
-	</form>"""
+	User Name: <input type= "text" name="user" value="{user}"><br>
+	Message: <input type="text" name="message" value="message"><br>
+	<button type="submit" form="mform" value="Submit">Submit</button> </form>"""
 	# todo make a frm to submit lcatin to get nearby stuff
 
 	message_box = message_box + '<ul>'

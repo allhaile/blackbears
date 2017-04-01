@@ -6,9 +6,20 @@ app = Flask(__name__)
 
 messages = []
 
+@app.route("/", methods =['GET'])
+
+#initial message should go to this route, then after messages are put in it 
+#will redirect to the /send-message route
+
+#error occurs if we go directly to send-message route
+
+def test():
+	return print_page("User", [])
+
 @app.route("/send-message", methods =['POST', 'GET'])
 #http://127.0.0.1:5000/send-message?user=USERHERE&message=MESSAGEHERE
 def send():
+	print("got to send")
 
 	# message_box = """<form>
 	# 	Message: <br>
@@ -17,25 +28,29 @@ def send():
 	# <form>
 	# """
 
+
 	nearbyStuff = []
 	if request.method =='POST':
-		sent_message = request.form['message']
-		if sent_message:
-			print("Message")
-			msg = {"From" : request.form['user'], "Message": request.form['message'] }
-			messages.append(msg)
-		elif request.form['findNearby']:
-			nearbyStuff.append('Food')
+		if request.form['message']:
+	 		sent_message = request.form['message']
+ 			print("Message")
+ 			msg = {"From" : request.form['user'], "Message": request.form['message'] }
+ 			messages.append(msg)
+ 			return print_page(request.form['user'], nearbyStuff)
+# 		elif request.form['findNearby']:
+# 			nearbyStuff.append('Food')
 
-#	if request.method =='GET':
-	if request.form['user']:
-		return print_page(request.form['user'], nearbyStuff)
-	else:
-		return print_page('', nearbyStuff)
+	elif request.method =='GET':
+		print("made it to GET")
+		if request.form['user']:
+ 			return print_page(request.form['user'], nearbyStuff)
+		else:
+ 			prrint_page('', nearbyStuff)
 
 
-	#rv = jsonify({"result" :"Your message was sent", "total messages": len(messages) })
-	#return rv
+
+# 	rv = jsonify({"result" :"Your message was sent", "total messages": len(messages) })
+# 	return rv
 
 @app.route("/get-messages")
 def all_messages():
@@ -44,20 +59,20 @@ def all_messages():
 
 def print_page(user, nearbyStuff):
 	message_box = f"""<form action="/send-message" method="post" id="mform">
-	<h1 style="font-family:verdana;">Message other travelers!</h1>
+	<h1 style="font-family:verdana;">Meet travelers in the area interested in exploring the Outdoors</h1>
 
 	<body style="background-color:powderblue;">
 
  	User Name: <input type= "text" name="user" value="{user}"><br>
- 	Message: <input type="text" name="message"><br>
+ 	Message: <input type="text" name="message" value="message"><br>
 	<button type="submit" form="mform" value="Submit">Submit</button>
-	<input type="submit" value="Find Nearby Stuff" name="findNearby">	</form>"""
+	</form>"""
 	# todo make a frm to submit lcatin to get nearby stuff
 
 	message_box = message_box + '<ul>'
 	for message in messages:
-		print(jsonify(message))
-		message_box = message_box + '<li>' + message['Message']
+		#print(jsonify(message))
+		message_box = message_box + '<li>' + message['From'] + ": "+ message['Message']
 	message_box = message_box + '</ul>'
 
 	if nearbyStuff:
